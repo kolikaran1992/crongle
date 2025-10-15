@@ -1,0 +1,6 @@
+[default.crongle]
+base_job_artefacts_dir = "job_artefacts"
+cron_job_log_base_dir = '/tmp/crongle_logs'
+default_job_timeout = 32400
+job_queue_dir = '@format {this.home_dir}/.congle/job_queue'
+kaggle_json_dir = '@format {this.home_dir}/.kaggle'
