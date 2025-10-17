@@ -1,7 +1,11 @@
+"""
+Do not import from any child module - since this is a central hub of utilities,
+importing another child module may result in circular imports
+"""
+
 import json
 from pathlib import Path
 from dynalog import config, get_logger
-from crongle.kaggle_api import KAGGLE_USER_NAME
 
 # Config and Logger --
 # --------------------
@@ -12,7 +16,7 @@ config = config.from_env(
     "default",
     keep=True,
     SETTINGS_FILE_FOR_DYNACONF=[
-        Path(__file__).parent.parent.joinpath("settings.toml").as_posix()
+        Path(__file__).parent.joinpath("settings.toml").as_posix()
     ],
 )
 config.crongle.poll_script_path = Path(__file__).parent.joinpath("cron.py").as_posix()
@@ -47,7 +51,3 @@ def load_json_file(json_path: Path) -> dict:
         raise JobFileError(f"Invalid JSON at {json_path}: {e}")
     except Exception as e:
         raise JobFileError(f"Failed to read JSON at {json_path}: {e}")
-
-
-def get_kernel_url(kernel_name: str) -> str:
-    return f"https://www.kaggle.com/code/{KAGGLE_USER_NAME}/{kernel_name}"

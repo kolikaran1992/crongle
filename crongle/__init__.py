@@ -17,10 +17,12 @@ from .kernel_job import KernelJob
 from .kernel_launcher import KernelLauncher
 
 # Kaggle API
-from .kaggle_api import KAGGLE_API
+from .kaggle_api import KAGGLE_API, KAGGLE_USER_NAME
 
-# Utilities
-from .utils import get_kernel_url
+
+def get_kernel_url(kernel_name: str) -> str:
+    return f"https://www.kaggle.com/code/{KAGGLE_USER_NAME}/{kernel_name}"
+
 
 __all__ = [
     "KernelJob",
