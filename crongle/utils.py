@@ -10,7 +10,7 @@ from dynalog import config, get_logger
 # Config and Logger --
 # --------------------
 
-logger = get_logger(__name__)
+logger = get_logger()
 
 config = config.from_env(
     "default",
