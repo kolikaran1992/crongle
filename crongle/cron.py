@@ -11,8 +11,6 @@ If complete or cancelled → cleans up job and removes its cron.
 import argparse, sys, requests, os
 from pathlib import Path
 
-sys.path.append("/home/limited_user/Projects/crongle")
-
 from crongle.kernel_job import KernelJob
 from crongle.kernel_watcher import cleanup_job
 from crongle.utils import (
@@ -137,7 +135,7 @@ def main():
     status = _get_kernel_status(job.kernel_name)
     details = f"\ncron output logfile: {get_cron_output_logfile(job.job_id)}\n"
     _send_slack_message(status=status, details=details, job_id=job_id)
-    if status in ("complete", "cancel_acknowledged"):
+    if status in ("complete", "cancel_acknowledged", "error"):
         logger.info(
             f"Kernel {job.kernel_name} finished with status '{status}' — downloading results."
         )
